@@ -12,8 +12,18 @@ function add(num_str) {
 		return 0;
 	}
 
-	// converted string to numbers array
-	let numbers = num_str.split(delimiter).map(e => Number(e));
+	let numbers = [], neg_numbers = []
+	
+	// filtering positive numbers
+	num_str.split(delimiter).forEach(e => {
+		if (Number(e) < 0) neg_numbers.push(Number(e))
+		else numbers.push(Number(e))
+	});
+
+	// throw error for negative numbers
+	if (neg_numbers.length > 0) {
+		throw new Error(`negative numbers not allowed ${neg_numbers.join(',')}`)
+	}
 
 	// sum numbers
 	let sum = numbers.reduce((sum, e) => sum + e, 0);
