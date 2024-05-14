@@ -26,9 +26,9 @@ describe("Test Add func for simple string", () => {
 		expect(add("1,2,3,4,5")).toBe(15);
 		expect(add("10, 20, 30")).toBe(60);
 	});
-})
+});
 
-describe("Test Add func for string with \n", () => {
+describe("Test Add func for string with \\n", () => {
 	test("Check invalid \n", () => {
 		const error = "Invalid number string"
 		expect(() => add("1,\n")).toThrow(error);
@@ -40,4 +40,13 @@ describe("Test Add func for string with \n", () => {
 		expect(add("1\n2,3")).toBe(6);
 		expect(add("10\n 20 ,20,\n 20,30")).toBe(100);
 	});
-})
+});
+
+describe("Test number string with delimiter", () => {
+	test("Handle different delimiters", () => {
+		expect(add("//;\n1;2")).toBe(3);
+		expect(add("//;\n1;2;5 ;2")).toBe(10);
+		expect(add("//:\n1 : 2:5 :2")).toBe(10);
+		expect(add("///\n2/ 1/5/2")).toBe(10);
+	});
+});
