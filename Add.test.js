@@ -43,6 +43,16 @@ describe("Test Add func for string with \\n", () => {
 });
 
 describe("Test number string with delimiter", () => {
+	test("Handle invalid delimiter", () => {
+		const error = "Invalid delimiter, valid format: //[delimiter]\\n[numbers…]"
+		expect(() => add("///;\n1;10;1;2")).toThrow(error);
+		expect(() => add("//;\p1;10")).toThrow(error);
+		expect(() => add("//;;\p1; 10")).toThrow(error);
+		expect(() => add("//|\n1| 10")).not.toThrow(error);
+		expect(() => add("//;\n1;9 ; 2")).not.toThrow(error);
+		expect(() => add("//a\n1 a9a2")).not.toThrow(error);
+	});
+
 	test("Handle different delimiters", () => {
 		expect(add("//;\n1;2")).toBe(3);
 		expect(add("//;\n1;2;5 ;2")).toBe(10);
