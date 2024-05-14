@@ -27,3 +27,15 @@ describe("Test Add func for simple string", () => {
 		expect(add("10, 20, 30")).toBe(60);
 	});
 })
+
+describe("Test Add func for string with \n", () => {
+	test("Check invalid \n", () => {
+		expect(() => add("1,\n")).toThrow("Invalid number string")
+		expect(() => add("\n 10, 20")).toThrow("Invalid number string")
+		expect(() => add("1\n 10,20")).not.toThrow("Invalid number string")
+	}); 
+	test("Handle lines between numbers", () => {
+		expect(add("1\n2,3")).toBe(6)
+		expect(add("10\n 20 ,20,\n 20,30")).toBe(100)
+	});
+})
