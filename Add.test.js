@@ -60,3 +60,11 @@ describe("Test number string with delimiter", () => {
 		expect(add("///\n2/ 1/5/2")).toBe(10);
 	});
 });
+
+describe("Test number string with negative numbers", () => {
+	test("Raise error for negative number", () => {
+		expect(() => add("-1, 20")).toThrow("negative numbers not allowed -1")
+		expect(() => add("1,4,-10,-20,8,9")).toThrow("negative numbers not allowed -10,-20")
+		expect(() => add("//:\n-1 : 2:-5 :-2")).toThrow("negative numbers not allowed -1,-5,-2")
+	});
+});
